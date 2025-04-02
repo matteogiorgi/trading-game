@@ -15,14 +15,22 @@ class Trader:
 
         # alloco il dizionario che conterrà gli ordini per ogni prodotto e
         # itero su ogni prodotto per cui ci sono dati di mercato
+        # (
+        #     nota: se dico profondità 2, considero i primi due livelli di prezzo su entrambi i lati del mercato
+        #     2 migliori offerete di acquisto e due migliori offerte di vendita
+        #     con questo ho una visione più completa di come si muove il mercato e mi permette di fare:
+        #         - stime sul fair value
+        #         - strategie tipo order book imbalance
+        #         - decisioni più informate per il market making
+        # )
         result = {}
         for product in state.order_depths:
             # estraggo la profondità dell'ordine e imposto un prezzo di soglia:
             # noi dobbiamo calcolare il valore del prezzo di soglia dinamicamente con:
-            #   -> stato posizione attuale (rischio di superare i limiti)
-            #   -> ossevazioni ambientali (prezzo bene, indice e tariffe)
-            #   -> trades già avvenuti (nessuna reazione al mercato)
-            #   -> PnL o gestione del rischio
+            #     - stato posizione attuale (rischio di superare i limiti)
+            #     - ossevazioni ambientali (prezzo bene, indice e tariffe)
+            #     - trades già avvenuti (nessuna reazione al mercato)
+            #     - PnL o gestione del rischio
             order_depth: OrderDepth = state.order_depths[product]
             orders: List[Order] = []
             acceptable_price = 10  # default

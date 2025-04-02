@@ -138,6 +138,21 @@ class Trade:
 
 
 class TradingState(object):
+    """
+    traderData -> ???
+    timestamp -> ???
+    listings -> ???
+    order_depths -> dizionario di simbolo:oggetto (orderdepth)
+                    ogni oggetto contiene un dizionario per gli ordini di acquisto e uno per gli ordini di vendita:
+                    buy_orders = {10: 100, 9: 50}   -> voglio comprare 100 unità a 10, 50 unità a 9
+                    sell_orders = {11: 80, 12: 60}  -> voglio vendere 80 unità a 11, 60 unità a 12
+
+    own_trades -> ???
+    market_trades -> ???
+    position -> ???
+    observations -> ???
+    """
+
     def __init__(
         self,
         traderData: str,
